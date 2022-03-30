@@ -1,11 +1,12 @@
 import axios from "axios";
-// 引入进度条
+// 引入进度条及其样式
 import nprogress from "nprogress";
 import "../../node_modules/nprogress/nprogress.css";
-const requests = axios.create({
+
+let requests = axios.create({
     baseURL: '/api',
     timeout: 5000,
-})
+});
 // 请求拦截器
 // 发送请求前
 requests.interceptors.request.use(function (config) {

@@ -16,7 +16,18 @@ const mutations = {
         state.searchList = searchList;
     }
 };
-const getters = {};
+const getters = {
+    // 计算属性
+    goodList(state) {
+        return state.searchList.goodsList || [];
+    },
+    trademarkList(state) {
+        return state.searchList.trademarkList||[];
+    },
+    attrsList(state) {
+        return state.searchList.attrsList||[];
+    }
+};
 export default {
     state,
     actions,

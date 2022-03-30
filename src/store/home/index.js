@@ -22,8 +22,8 @@ const actions = {
     // 获取floor数据
     async getfloorList(commit) {
         let result = await reqGetfloorList()
-        if(result.code==200) {
-            commit('GETFLOORLIST',result.data)
+        if (result.code == 200) {
+            commit('GETFLOORLIST', result.data)
         }
     }
 };
@@ -34,7 +34,7 @@ const mutations = {
     GETBANNERLIST(state, bannerList) {
         state.bannerList = bannerList;
     },
-    GETFLOORLIST(state,floorList) {
+    GETFLOORLIST(state, floorList) {
         state.floorList = floorList;
     }
 };
