@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TapNav></TapNav>
+    <typeNav />
     <ListContainer />
     <Recommend />
     <Rank />
@@ -28,12 +28,12 @@ export default {
     Floor,
   },
   mounted() {
-    this.$store.dispatch('getfloorList')
+      this.$store.dispatch("getFloorList");
   },
   computed: {
-    ...mapState({
-      floorList: (state) => {state.home.floorList},
-    })
+     ...mapState({
+      floorList: (state) => state.home.floorList,
+    }),
   }
 };
 </script>

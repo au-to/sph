@@ -7,19 +7,19 @@
 </template>
 
 <script>
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 export default {
-  name: 'App',
+  name: "App",
   mounted() {
     // 组件挂载完毕通知vuex发请求
-    this.$store.dispatch("categoryList");
+    this.$store.dispatch("getCategoryList");
   },
   components: {
     Header,
     Footer,
   },
-}
+};
 </script>
 
 <style>

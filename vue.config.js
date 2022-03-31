@@ -1,5 +1,5 @@
-import { defineConfig } from '@vue/cli-service'
-export default defineConfig({
+const { defineConfig } = require('@vue/cli-service');
+module.exports = defineConfig({
   lintOnSave: false,
   transpileDependencies: true,
   // 代理跨域

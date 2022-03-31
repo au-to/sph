@@ -4,14 +4,17 @@ import router from './router'
 import store from '@/store'
 import '@/mock/mockServe'
 // 全局注册三级联动组件
-import TapNav from '@/components/TapNav'
+import typeNav from "@/components/TypeNav";
 //全局注册轮播图组件
 import Carousel from '@/components/Carousel'
 // 引入轮播图样式
 import '../node_modules/swiper/css/swiper.min.css'
+// 分页器组件
+import Pagination from '@/components/Pagination'
 Vue.config.productionTip = false
-Vue.component(TapNav.name,TapNav)
+Vue.component(typeNav.name, typeNav);
 Vue.component(Carousel.name,Carousel)
+Vue.component(Pagination.name,Pagination)
 new Vue({
   render: h => h(App),
   // 配置全局事件总线

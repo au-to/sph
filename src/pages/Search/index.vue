@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TapNav />
+    <typeNav />
     <div class="main">
       <div class="py-container">
         <!--bread面包屑-->
@@ -69,14 +69,15 @@
               </ul>
             </div>
           </div>
+          <!-- 销售产品列表 -->
           <div class="goods-list">
             <ul class="yui3-g">
-              <li class="yui3-u-1-5" v-for="good in goodList" :key="good.id">
+              <li class="yui3-u-1-5" v-for="good in goodsList" :key="good.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
+                    <router-link to="/detail/${good.id}" target="_blank"
                       ><img :src="good.defaultImg"
-                    /></a>
+                    /></router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -110,35 +111,12 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
-            <div class="sui-pagination clearfix">
-              <ul>
-                <li class="prev disabled">
-                  <a href="#">«上一页</a>
-                </li>
-                <li class="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
-                </li>
-                <li class="dotted"><span>...</span></li>
-                <li class="next">
-                  <a href="#">下一页»</a>
-                </li>
-              </ul>
-              <div><span>共10页&nbsp;</span></div>
-            </div>
-          </div>
+          <!-- 分页器 -->
+          <Pagination :pageNo="searchParams.pageNo"
+           :pageSize="searchParams.pageSize"
+           :total="91"
+           :continues="5"
+           @getPageNo="getPageNo" />
         </div>
       </div>
     </div>
@@ -147,11 +125,13 @@
 
 <script>
 import SearchSelector from "./SearchSelector/SearchSelector";
+import Pagination from "@/components/Pagination";
 import { mapGetters } from "vuex";
 export default {
   name: "Search",
   components: {
     SearchSelector,
+    Pagination,
   },
   data() {
     return {
@@ -185,7 +165,7 @@ export default {
     this.getData();
   },
   computed: {
-    ...mapGetters(["goodList"]),
+    ...mapGetters(["goodsList"]),
     isOne() {
       return this.searchParams.order.indexOf("1") != -1;
     },
@@ -200,6 +180,7 @@ export default {
     },
   },
   methods: {
+    // 向服务器发请求，获取数据
     getData() {
       this.$store.dispatch("getSearchList", {});
     },
@@ -265,6 +246,11 @@ export default {
       //再次发请求
       this.getData();
     },
+    // 自定义事件，获取当前页数
+    getPageNo(pageNo) {
+      this.searchParams.pageNo = pageNo;
+      this.getData();
+    }
   },
   watch: {
     $route(newValue, oldValue) {
