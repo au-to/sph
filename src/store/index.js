@@ -8,6 +8,7 @@ Vue.use(Vuex);
 import home from "./home";
 import search from "./search";
 import detail from "./detail";
+import shopcart from "./shopcart";
 
 //需要暴露Vuex.Store类的实例(你需要暴露这个类的实例，如果你不对外暴露，外部是不能使用的)
 export default new Vuex.Store({
@@ -16,5 +17,6 @@ export default new Vuex.Store({
     home,
     search,
     detail,
+    shopcart,
   }
 });
