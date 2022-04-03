@@ -11,15 +11,18 @@ import Carousel from '@/components/Carousel'
 import '../node_modules/swiper/css/swiper.min.css'
 // 分页器组件
 import Pagination from '@/components/Pagination'
+// 统一引入接口
+import * as API from '@/api'
 Vue.config.productionTip = false
 Vue.component(typeNav.name, typeNav);
-Vue.component(Carousel.name,Carousel)
-Vue.component(Pagination.name,Pagination)
+Vue.component(Carousel.name, Carousel)
+Vue.component(Pagination.name, Pagination)
 new Vue({
   render: h => h(App),
   // 配置全局事件总线
   beforeCreate() {
     Vue.prototype.$bus = this;
+    Vue.prototype.$API = API;
   },
   router,
   store,

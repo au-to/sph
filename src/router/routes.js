@@ -5,6 +5,7 @@ import Search from '@/pages/Search'
 import Detail from '@/pages/Detail'
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
+import Trade from '@/pages/Trade'
 
 export default [{
     path: '/home',
@@ -38,13 +39,23 @@ export default [{
     path: '/addcartsuccess',
     name: 'addcartsuccess',
     component: AddCartSuccess,
-    meta: {show:true}
+    meta: { show: true }
 },
 {
     component: ShopCart,
     name: 'shopcart',
     path: '/shopcart',
-    meta: {show:true}
+    meta: { show: true }
+},
+{
+    component: Trade,
+    path: '/trade',
+    meta: { show: true }
+},
+{
+    component: Trade,
+    path: '/pay',
+    meta: { show: true }
 },
 {
     path: '',
