@@ -1,4 +1,4 @@
-import Home from '@/pages/Home'
+// import Home from '@/pages/Home'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import Search from '@/pages/Search'
@@ -6,10 +6,17 @@ import Detail from '@/pages/Detail'
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
 import Trade from '@/pages/Trade'
+import PaySuccess from '@/pages/PaySuccess'
+import Center from '@/pages/Center'
+import Pay from '@/pages/Pay'
+// 引入二级路由组件
+import myOrder from '@/pages/Center/myOrder'
+import groupOrder from '@/pages/Center/groupOrder'
 
 export default [{
     path: '/home',
-    component: Home,
+    // 路由懒加载
+    component: ()=>import('@/pages/Home'),
     meta: { show: true }
 },
 {
@@ -50,12 +57,51 @@ export default [{
 {
     component: Trade,
     path: '/trade',
+    meta: { show: true },
+    // 路由独享守卫
+    beforeEnter: (to, from, next) => {
+        if(from.path=='/shopcart') {
+            next()
+        }else{
+            next(false);
+        }
+    }
+},
+{
+    component: Pay,
+    path: '/pay',
+    meta: { show: true },
+    beforeEnter: (to,from,next)=>{
+        if(from.path=='/trade') {
+            next()
+        }else{
+            next(false);
+        }
+    }
+},
+{
+    component: PaySuccess,
+    path: '/paysuccess',
     meta: { show: true }
 },
 {
-    component: Trade,
-    path: '/pay',
-    meta: { show: true }
+    component: Center,
+    path: '/center',
+    meta: { show: true },
+    children:[
+        {
+            path: 'myorder',
+            component: myOrder
+        },
+        {
+            path: 'groupoder',
+            component: groupOrder
+        },
+        {
+            path: '/center',
+            redirect: '/center/myorder'
+        }
+    ]
 },
 {
     path: '',

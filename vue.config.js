@@ -9,5 +9,7 @@ module.exports = defineConfig({
         target: 'http://39.98.123.211',
       },
     }
-  }
+  },
+  // 去掉map文件夹
+  productionSourceMap: false
 })

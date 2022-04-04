@@ -32,29 +32,38 @@ let router = new VueRouter({
 })
 
 // 全局前置守卫
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     // 若用户已经登录，不能去login
     let token = store.state.user.token;
     let name = store.state.user.userInfo.name;
     if (token) {
-        if (to.path == '/login'|| to.path=='/register') {
+        if (to.path == '/login' || to.path == '/register') {
             next('/home');
-        } else {
-            if(name) {
+        }
+        else {
+            if (name) {
                 next();
-            }else{
-              try {
-                await store.dispatch('getUserInfo');
-                next();
-              } catch (error) {
-                // 清除token
-                await store.dispatch('userLogout');
-                next('/login')
-              }
+            }
+            else {
+                try {
+                    await store.dispatch('getUserInfo');
+                    next();
+                }
+                catch (error) {
+                    // 清除token
+                    await store.dispatch('userLogout');
+                    next('/login')
+                }
             }
         }
-    }else{
-        next();
+    } else {
+        let toPath = to.path;
+        if(toPath.indexOf('/trade')!==-1 || toPath.indexOf('/pay')!==-1 || toPath.indexOf('/center')!==-1){
+            next('/login?redirect='+toPath);
+        }else{
+            next();
+        }
     }
-})
+}
+)
 export default router;

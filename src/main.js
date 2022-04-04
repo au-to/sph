@@ -13,10 +13,17 @@ import '../node_modules/swiper/css/swiper.min.css'
 import Pagination from '@/components/Pagination'
 // 统一引入接口
 import * as API from '@/api'
+// 按需引入element-ui
+import{MessageBox} from 'element-ui'
+// 表单验证
+import '@/plugins/validate'
+
 Vue.config.productionTip = false
 Vue.component(typeNav.name, typeNav);
 Vue.component(Carousel.name, Carousel)
 Vue.component(Pagination.name, Pagination)
+Vue.prototype.$msgbox = MessageBox;
+Vue.prototype.$alert = MessageBox.alert;
 new Vue({
   render: h => h(App),
   // 配置全局事件总线
